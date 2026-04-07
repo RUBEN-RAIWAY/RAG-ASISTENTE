@@ -7,6 +7,15 @@ import { AskQuestionUseCase } from '../../application/use-cases/AskQuestionUseCa
 
 dotenv.config();
 
+// Debug: mostrar variables disponibles
+console.log('ENV VARS:', {
+  MISTRAL_API_KEY: process.env['MISTRAL_API_KEY'] ? 'SET' : 'NOT SET',
+  PINECONE_API_KEY: process.env['PINECONE_API_KEY'] ? 'SET' : 'NOT SET',
+  PINECONE_INDEX_NAME: process.env['PINECONE_INDEX_NAME'] ? 'SET' : 'NOT SET',
+  PINECONE_HOST: process.env['PINECONE_HOST'] ? 'SET' : 'NOT SET',
+  PORT: process.env['PORT'] ? 'SET' : 'NOT SET',
+});
+
 function requireEnv(key: string): string {
   const value = process.env[key];
   if (!value) throw new Error(`Missing required environment variable: ${key}`);
