@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAG Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">&#129504;</span>
+          <span class="logo-text">RAG Assistant</span>
+        </div>
+        <p class="logo-sub">Powered by Mistral + Pinecone</p>
+      </div>
+
+      <!-- Upload Section -->
+      <div class="upload-section">
+        <h3 class="section-title">Upload Documents</h3>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="fileInput" accept=".pdf" hidden />
+          <div class="upload-icon">&#128196;</div>
+          <p class="upload-text">Click or drag a PDF here</p>
+          <p class="upload-hint">Max 20 MB per file</p>
+        </div>
+        <button class="btn btn-primary" id="uploadBtn" disabled>
+          <span class="btn-icon">&#8679;</span> Upload PDF
+        </button>
+        <div id="uploadStatus" class="status-message hidden"></div>
+      </div>
+
+      <!-- Index Stats -->
+      <div class="stats-section">
+        <h3 class="section-title">Knowledge Base</h3>
+        <div class="stats-card" id="statsCard">
+          <div class="stat-item">
+            <span class="stat-label">Vectors stored</span>
+            <span class="stat-value" id="totalVectors">—</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Embedding dim</span>
+            <span class="stat-value" id="embeddingDim">—</span>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="refreshStats">&#8635; Refresh</button>
+      </div>
+    </aside>
+
+    <!-- Main chat area -->
+    <main class="chat-area">
+      <div class="chat-header">
+        <h2>Chat with your documents</h2>
+        <p>Upload PDFs and ask questions about their content</p>
+      </div>
+
+      <div class="messages-container" id="messagesContainer">
+        <div class="welcome-message">
+          <div class="welcome-icon">&#129504;</div>
+          <h3>Hello! I'm your RAG Assistant</h3>
+          <p>Upload a PDF document on the left panel, then ask me anything about its content.</p>
+          <div class="example-questions">
+            <p class="examples-title">Example questions:</p>
+            <button class="example-btn" onclick="setQuestion('What is the main topic of the document?')">What is the main topic of the document?</button>
+            <button class="example-btn" onclick="setQuestion('Summarize the key points.')">Summarize the key points.</button>
+            <button class="example-btn" onclick="setQuestion('What conclusions does the document present?')">What conclusions does the document present?</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="input-wrapper">
+          <textarea
+            id="questionInput"
+            placeholder="Ask a question about your documents..."
+            rows="1"
+            maxlength="2000"
+          ></textarea>
+          <button class="btn btn-send" id="sendBtn" title="Send (Enter)">
+            <span>&#9658;</span>
+          </button>
+        </div>
+        <p class="input-hint">Press <kbd>Enter</kbd> to send &middot; <kbd>Shift+Enter</kbd> for new line</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
